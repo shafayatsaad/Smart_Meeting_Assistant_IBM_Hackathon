@@ -1,6 +1,7 @@
 /* Fonts loaded via HTML preload for better performance */
 
 @import 'footer.css';
+@import 'video.css';
 
 :root {
   --bg: #030408; 
