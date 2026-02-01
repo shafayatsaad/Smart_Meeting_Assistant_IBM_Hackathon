@@ -106,8 +106,8 @@ body::after {
 
 /* HERO */
 .hero { 
-  padding-top: 80px;
-  min-height: 100vh; 
+  padding-top: 60px; /* Reduced from 80px */
+  min-height: 80vh; /* Reduced from 100vh for compactness */
   display: flex; 
   align-items: center; 
   justify-content: center; 
@@ -128,13 +128,13 @@ body::after {
   mix-blend-mode: screen; /* Helps visibility against dark bg */
 }
 .hero-content { max-width: 900px; text-align: center; }
-.hero h1 { font-size: 56px; line-height: 1.1; letter-spacing: -1px; }
+.hero h1 { font-size: 56px; line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px; }
 .hero h1 span { color: var(--blue); text-shadow: 0 0 20px rgba(15, 98, 254, 0.6); }
-.hero p { margin-top: 20px; color: var(--muted); font-size: 18px; }
-.hero-buttons { margin-top: 36px; display: flex; justify-content: center; gap: 20px; }
+.hero p { margin-top: 10px; color: var(--muted); font-size: 18px; }
+.hero-buttons { margin-top: 24px; display: flex; justify-content: center; gap: 20px; }
 
 /* FEATURES */
-.features { padding: 80px 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+.features { padding: 40px 48px 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
 .feature-card { 
   background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
   border: 1px solid var(--border); 
