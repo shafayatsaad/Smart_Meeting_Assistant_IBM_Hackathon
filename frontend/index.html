@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VICTORSAI – Smart Meeting Assistant</title>
+  <!-- Preload fonts to prevent FOUC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="data:,">
+</head>
+<body onload="document.body.classList.add('loaded')">
+
+  <!-- Decorative Blobs -->
+  <div class="float-element blob-1"></div>
+  <div class="float-element blob-2"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="mainNav">
+    <div class="logo">
+      <span class="brand">VICTORSAI</span>
+      <span class="sub">SMART ASSISTANT</span>
+    </div>
+
+    <div class="nav-actions">
+      <a class="ghost-btn" href="demo.html">Demo</a>
+      <a class="primary-btn" href="input.html">Launch Assistant</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content reveal">
+      <h1>Turn Meetings Into <span>Actionable Intelligence</span></h1>
+      <p>
+        VICTORSAI analyzes, summarizes, and extracts action items
+        from meetings in real time — so nothing important is ever missed.
+      </p>
+
+      <div class="hero-buttons">
+        <a class="primary-btn large" href="input.html">Start Session</a>
+        <a class="ghost-btn large" href="#features">View Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="features">
+
+    <div class="feature-card reveal stagger-1">
+      <h3>🧠 Contextual AI Assistant</h3>
+      <p>Ask questions mid-meeting and get instant, context-aware answers with deep meeting history.</p>
+    </div>
+
+    <div class="feature-card reveal stagger-2">
+      <h3>📋 Smart Summaries</h3>
+      <p>Automatic meeting summaries with zero manual note-taking. Perfect for quick reviews.</p>
+    </div>
+
+    <div class="feature-card reveal stagger-3">
+      <h3>✅ Action Items</h3>
+      <p>Extract tasks, owners, and deadlines in real time. Never miss a single commitment again.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta reveal">
+    <h2><span class="blue-text">Smarter</span> Meetings. <span class="blue-text">Better</span> Decisions.</h2>
+    <p>Let VICTORSAI handle the details. You focus on decisions.</p>
+    <a class="primary-btn large" href="input.html">Launch Assistant</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo">
+          <span class="brand">VICTORSAI</span>
+          <span class="sub">SMART ASSISTANT</span>
+        </div>
+        <p style="margin-top: 15px;">Transforming how teams capture, analyze, and act on meeting intelligence through agentic AI orchestration.</p>
+        <div class="watsonx-badge">
+          <span>Powered by</span>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" height="10" style="filter: invert(1);">
+          <span>watsonx.ai</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul class="footer-links">
+          <li><a href="demo.html">Demo Flow</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="input.html">Launch App</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="https://github.com/kenshin101/smart-meeting-assistant">GitHub</a></li>
+          <li><a href="https://github.com/kenshin101/smart-meeting-assistant/blob/main/README.md">Documentation</a></li>
+          <li><a href="#">API Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Mission</h4>
+        <p>Built for the IBM Hackathon to push the boundaries of multi-agent collaboration and real-time intelligence extraction.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 VICTORSAI. All rights reserved.</p>
+      <div style="display: flex; gap: 20px;">
+        <span class="footer-brand">IBM HACKATHON 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky Nav Scroll effect
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('mainNav');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll Reveal Observer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Mouse glow for feature cards
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.onmousemove = e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      };
+    });
+  </script>
+
+</body>
+</html>
