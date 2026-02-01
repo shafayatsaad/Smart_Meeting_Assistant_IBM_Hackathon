@@ -65,7 +65,7 @@ body::after {
 }
 
 .logo .brand { font-weight: 800; letter-spacing: 1px; font-size: 20px; }
-.logo .sub { display: block; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+.logo .sub { display: block; font-size: 10px; color: var(--blue); letter-spacing: 2px; text-transform: uppercase; }
 
 .nav-actions { display: flex; gap: 16px; }
 
@@ -116,7 +116,7 @@ body::after {
 }
 .hero-content { max-width: 900px; text-align: center; }
 .hero h1 { font-size: 56px; line-height: 1.1; letter-spacing: -1px; }
-.hero h1 span { color: var(--blue); }
+.hero h1 span { color: var(--blue); text-shadow: 0 0 20px rgba(15, 98, 254, 0.6); }
 .hero p { margin-top: 20px; color: var(--muted); font-size: 18px; }
 .hero-buttons { margin-top: 36px; display: flex; justify-content: center; gap: 20px; }
 
@@ -146,8 +146,8 @@ body::after {
 
 .feature-card:hover {
   transform: translateY(-8px) scale(1.02);
-  border-color: var(--border-bright);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+  border-color: rgba(15, 98, 254, 0.4);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(15, 98, 254, 0.1);
 }
 
 .feature-card:hover::before { opacity: 1; }
@@ -201,7 +201,7 @@ body::after {
 /* FOOTER (Styles moved to base.css for consistency) */
 
 /* UTILITIES & ANIMATIONS */
-.blue-text { color: var(--blue); }
+.blue-text { color: var(--blue); text-shadow: 0 0 15px rgba(15, 98, 254, 0.5); }
 
 .reveal {
   opacity: 0;
