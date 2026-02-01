@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Smart Meeting Assistant - Demo Flow</title>
+  <!-- Preload fonts to prevent FOUC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <style>
+    /* Critical CSS to prevent white flash */
+    html { background: #030408; }
+    body { opacity: 0; transition: opacity 0.15s ease-in; }
+    body.loaded { opacity: 1; }
+    .flow { display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap; padding: 20px; }
+    .flow .step { background: var(--glass); border: 1px solid var(--glass-border); padding: 12px 16px; border-radius: 12px; min-width: 160px; text-align:center; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+    .arrow { color: var(--text-dim); transition: all 0.5s ease; font-size: 20px; font-weight: bold; }
+    
+    /* Sequential Glow Effect */
+    .step.active { 
+      border-color: var(--accent-blue); 
+      box-shadow: 0 0 30px rgba(15, 98, 254, 0.6); 
+      transform: translateY(-4px) scale(1.02);
+      background: rgba(15, 98, 254, 0.15);
+      z-index: 2;
+    }
+
+    .arrow.active {
+      color: var(--accent-blue);
+      text-shadow: 0 0 15px var(--accent-blue);
+      transform: scale(1.2);
+    }
+    
+    @media (max-width: 600px) {
+      .flow { flex-direction: column; gap: 8px; }
+      .flow .step { min-width: auto; width: 100%; }
+      .arrow { transform: rotate(90deg); font-size: 18px; }
+      .arrow.active { transform: rotate(90deg) scale(1.2); }
+    }
+  </style>
+</head>
+<body onload="document.body.classList.add('loaded'); startAnimation();">
+  <header>
+    <div>
+      <h1 style="margin:0; font-size:22px; letter-spacing:-1px;">VICTORS<span>AI</span></h1>
+      <div style="font-size:9px; color:var(--accent-blue); font-weight:800; letter-spacing:3px;">SMART ASSISTANT</div>
+    </div>
+    <div class="btn-group">
+      <a href="index.html" class="btn">🏠 Home</a>
+      <a href="input.html" class="btn">📝 Input</a>
+      <a href="results.html" class="btn">📊 Results</a>
+      <a href="demo.html" class="btn btn-primary">🧩 Demo</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card hero" style="align-items:center;">
+      <h1>Agent Orchestration</h1>
+      <p>Understanding Agent → Summarization → Action Extraction → Follow-up → Q&A</p>
+    </div>
+
+    <div class="card" style="margin-top:15px;">
+      <div class="section-title">WORKFLOW FLOW</div>
+      <div class="flow" id="workflowSteps">
+        <div class="step">🧠 Understanding Agent</div>
+        <div class="arrow">→</div>
+        <div class="step">📝 Summarization Agent</div>
+        <div class="arrow">→</div>
+        <div class="step">✅ Action Agent</div>
+        <div class="arrow">→</div>
+        <div class="step">📨 Follow-up</div>
+        <div class="arrow">→</div>
+        <div class="step">💬 Q&A</div>
+      </div>
+      <div class="helper" style="text-align:center;">Witness the intelligence moving through each specialized agent.</div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo">
+          <span class="brand">VICTORSAI</span>
+          <span class="sub">SMART ASSISTANT</span>
+        </div>
+        <p style="margin-top: 15px;">Transforming how teams capture, analyze, and act on meeting intelligence through agentic AI orchestration.</p>
+        <div class="watsonx-badge">
+          <span>Powered by</span>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" height="10" style="filter: invert(1);">
+          <span>watsonx.ai</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul class="footer-links">
+          <li><a href="demo.html">Demo Flow</a></li>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="input.html">Launch App</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="https://github.com/kenshin101/smart-meeting-assistant">GitHub</a></li>
+          <li><a href="https://github.com/kenshin101/smart-meeting-assistant/blob/main/README.md">Documentation</a></li>
+          <li><a href="#">API Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Mission</h4>
+        <p>Built for the IBM Hackathon to push the boundaries of multi-agent collaboration and real-time intelligence extraction.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 VICTORSAI. All rights reserved.</p>
+      <div style="display: flex; gap: 20px;">
+        <span style="font-weight:800; color:var(--text-main);">IBM HACKATHON 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function startAnimation() {
+      const parent = document.getElementById('workflowSteps');
+      const elements = Array.from(parent.children);
+      let currentIndex = 0;
+      const INTERVAL = 1200; // Faster, more dynamic interval
+
+      function nextStep() {
+        // Remove active class from all elements
+        elements.forEach(el => el.classList.remove('active'));
+        
+        // Add active class to current element
+        elements[currentIndex].classList.add('active');
+        
+        // Move to next element or reset to 0
+        currentIndex = (currentIndex + 1) % elements.length;
+        
+        setTimeout(nextStep, INTERVAL);
+      }
+
+      nextStep();
+    }
+  </script>
+</body>
+</html>
