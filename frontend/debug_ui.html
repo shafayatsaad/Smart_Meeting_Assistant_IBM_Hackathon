@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Debug UI</title>
+</head>
+<body>
+  <h1>Injecting Debug Data...</h1>
+  <script>
+    const mockData = {
+        data: {
+            summary: {
+                meetingSummary: "The team discussed the Q1 roadmap, focusing on the new AI features and mobile optimization. Budget constraints were raised as a primary risk.",
+                participants: ["Alice", "Bob", "Charlie", "David"],
+                keyPoints: [
+                    "Mobile traffic has increased by 40%.",
+                    "The new API endpoint is ready for testing.",
+                    "Design resources are currently stretched thin."
+                ],
+                decisions: [
+                    "Go ahead with the React Native migration.",
+                    "Hire one new contract designer."
+                ],
+                risks: [
+                    "Timeline might slip if backend integration is delayed.",
+                    "Budget for Q2 is tight."
+                ],
+                topics: ["Roadmap", "Mobile", "Budget", "Hiring"]
+            },
+            actionItems: {
+                summary: { totalTasks: 3, assignedTasks: 2, flaggedItems: 1 },
+                actionItems: [
+                    { task: "Finalize API specs", owner: "Alice", deadline: "2024-02-10", priority: "high", flagged: false },
+                    { task: "Update mobile mockups", owner: "Bob", deadline: "2024-02-12", priority: "medium", flagged: false },
+                    { task: "Review Q2 budget proposals", owner: "UNASSIGNED", deadline: "2024-02-15", priority: "high", flagged: true, flagReason: "Missing owner" }
+                ]
+            },
+            followUps: {
+                escalations: [
+                   { issue: "Budget overflow", escalateTo: "Finance Dept", reason: "Requires approval > $10k" } 
+                ],
+                nextMeetingSuggestion: {
+                    recommended: true,
+                    suggestedTimeframe: "Next Tuesday 10:00 AM",
+                    agenda: ["Budget Approval", "API Demo"],
+                    requiredAttendees: ["Alice", "Bob", "Finance Rep"]
+                },
+                followUpActions: [
+                    { type: "email", action: "Email Finance about budget overflow", urgency: "high", suggestedDate: "Tomorrow" },
+                    { type: "meeting", action: "Schedule sync with Design team", urgency: "medium" }
+                ]
+            }
+        }
+    };
+
+    sessionStorage.setItem('meetingResults', JSON.stringify(mockData));
+    console.log("Mock data injected. Redirecting...");
+    setTimeout(() => {
+        window.location.href = 'results.html';
+    }, 500);
+  </script>
+</body>
+</html>
