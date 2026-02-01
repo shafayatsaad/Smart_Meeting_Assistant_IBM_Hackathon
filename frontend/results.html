@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Smart Meeting Assistant - Results</title>
+  <!-- Preload fonts to prevent FOUC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <script type="module" src="assets/js/results.js" defer></script>
+  <style>
+    /* Critical CSS to prevent white flash */
+    html { background: #030408; }
+    body { opacity: 0; transition: opacity 0.15s ease-in; }
+    body.loaded { opacity: 1; }
+  </style>
+</head>
+<body onload="document.body.classList.add('loaded')">
+  <header>
+    <div>
+      <h1 style="margin:0; font-size:22px; letter-spacing:-1px;">VICTORS<span>AI</span></h1>
+      <div style="font-size:9px; color:var(--accent-blue); font-weight:800; letter-spacing:3px;">SMART ASSISTANT</div>
+    </div>
+    <div class="btn-group">
+      <a href="index.html" class="btn">🏠 Home</a>
+      <a href="input.html" class="btn">📝 Input</a>
+      <a href="results.html" class="btn btn-primary">📊 Results</a>
+      <a href="demo.html" class="btn">🧩 Demo</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Three cards in a row -->
+    <!-- Three cards in a row -->
+    <div class="results-grid">
+      <div class="card" style="min-height:420px;">
+        <div class="section-title">SUMMARY</div>
+        <div id="summary" class="scroll" style="max-height:360px;">
+          <div style="padding: 20px; text-align: center; color: var(--text-dim);">Waiting for results...</div>
+        </div>
+      </div>
+      <div class="card" style="min-height:420px;">
+        <div class="section-title">ACTION ITEMS</div>
+        <div id="actions" class="scroll" style="max-height:360px;">
+          <div style="padding: 20px; text-align: center; color: var(--text-dim);">No tasks yet.</div>
+        </div>
+      </div>
+      <div class="card" style="min-height:420px;">
+        <div class="section-title">FOLLOW-UP RECOMMENDATIONS</div>
+        <div id="followups" class="scroll" style="max-height:360px;">
+          <div style="padding: 20px; text-align: center; color: var(--text-dim);">None yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Raw Data Section (Missing elements fixed) -->
+    <div class="card" style="margin-top:15px; display:none;" id="rawSection">
+      <div class="section-title">RAW ANALYSIS DATA</div>
+      <div id="metadata"></div>
+      <pre id="raw" class="scroll" style="font-size:10px; opacity:0.6; background:rgba(0,0,0,0.3); padding:10px; border-radius:8px; max-height:200px;"></pre>
+    </div>
+  </main>
+
+  <!-- Q&A Chat at bottom -->
+  <div class="container" style="padding-bottom:20px;">
+    <div class="card" style="margin-top:15px;">
+      <div class="section-title">Q&A CHAT</div>
+      <div id="qaLog" class="chat-log scroll" style="max-height:260px;"></div>
+      <div class="chat">
+        <input id="question" class="input" placeholder="Ask a question, e.g., What tasks did David have?" />
+        <button id="askBtn" class="btn btn-primary">Ask</button>
+        <span id="qaStatus" class="status" style="display:none;"><span class="spinner"></span> Asking...</span>
+      </div>
+      <div id="qaError" class="error" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo">
+          <span class="brand">VICTORSAI</span>
+          <span class="sub">SMART ASSISTANT</span>
+        </div>
+        <p style="margin-top: 15px;">Transforming how teams capture, analyze, and act on meeting intelligence through agentic AI orchestration.</p>
+        <div class="watsonx-badge">
+          <span>Powered by</span>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" height="10" style="filter: invert(1);">
+          <span>watsonx.ai</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul class="footer-links">
+          <li><a href="demo.html">Demo Flow</a></li>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="input.html">Launch App</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="https://github.com/kenshin101/smart-meeting-assistant">GitHub</a></li>
+          <li><a href="https://github.com/kenshin101/smart-meeting-assistant/blob/main/README.md">Documentation</a></li>
+          <li><a href="#">API Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Mission</h4>
+        <p>Built for the IBM Hackathon to push the boundaries of multi-agent collaboration and real-time intelligence extraction.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 VICTORSAI. All rights reserved.</p>
+      <div style="display: flex; gap: 20px;">
+        <span style="font-weight:800; color:var(--text-main);">IBM HACKATHON 2026</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
