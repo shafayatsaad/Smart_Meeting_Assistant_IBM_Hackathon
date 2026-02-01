@@ -76,14 +76,24 @@
   </section>
 
   <!-- DEMO VIDEO -->
+  <section class="video-section reveal">
+    <div class="video-card">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/9ZPboZJqa_g" title="VICTORSAI Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
   <!-- TEAM -->
   <section class="team reveal">
     <h2>Meet Our Team</h2>
-    <p style="color: var(--muted); margin-top: 10px;">The minds behind VICTORSAI</p>
+    <p style="color: var(--muted); margin-top: 10px;">The functional minds behind VICTORSAI</p>
     <div class="team-grid">
       <!-- Member 1: Anyanwuocha-Collins David C. -->
       <div class="team-member">
-        <div class="member-avatar">D</div>
+        <div class="member-avatar">
+          <img src="assets/images/david.heic" alt="David C.">
+        </div>
         <div class="member-name">Anyanwuocha-Collins David C.</div>
         <div class="member-role">Team Lead & Full-Stack Web Developer</div>
         <div class="member-bio">
@@ -197,11 +207,12 @@
       if (window.initLightRays) {
         initLightRays('light-rays-container', {
           raysColor: '#0f62fe', // Victorious Blue
-          raysSpeed: 0.2, // Slow and majestic
-          lightSpread: 0.2,
-          rayLength: 1.5,
-          fadeDistance: 0.8,
-          mouseInfluence: 0.05
+          raysSpeed: 0.15, // Majestic flow
+          lightSpread: 0.3, // Brighter rays
+          rayLength: 2.0, // Longer rays
+          fadeDistance: 0.9,
+          mouseInfluence: 0.08,
+          noiseAmount: 0.02 // Subtle grain
         });
       }
     });
