@@ -110,9 +110,13 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start server
-const server = app.listen(PORT, () => {
-  console.log(`
+// Export for Vercel (Serverless Functions)
+module.exports = app;
+
+// Start server ONLY if run directly (Local Development)
+if (require.main === module) {
+  const server = app.listen(PORT, () => {
+    console.log(`
   ╔═══════════════════════════════════════════════════════════════════╗
   ║   🤖 Smart Meeting Assistant                                      ║
   ║   Server running on http://localhost:${PORT}                         ║
@@ -122,20 +126,21 @@ const server = app.listen(PORT, () => {
   ╚═══════════════════════════════════════════════════════════════════╝
   `);
 
-  if (!watsonxConfig.isConfigured()) {
-    console.warn(
-      "⚠️  Warning: watsonx.ai is not configured. Set WATSONX_API_KEY, WATSONX_PROJECT_ID, and WATSONX_URL in .env",
-    );
-  }
-});
+    if (!watsonxConfig.isConfigured()) {
+      console.warn(
+        "⚠️  Warning: watsonx.ai is not configured. Set WATSONX_API_KEY, WATSONX_PROJECT_ID, and WATSONX_URL in .env",
+      );
+    }
+  });
 
-server.on("error", (e) => {
-  if (e.code === "EADDRINUSE") {
-    console.error(
-      `[Startup] CRITICAL ERROR: Port ${PORT} is already in use. Please close the other process or set a different PORT in .env`,
-    );
-  } else {
-    console.error("[Startup] Server Error:", e);
-  }
-  process.exit(1);
-});
+  server.on("error", (e) => {
+    if (e.code === "EADDRINUSE") {
+      console.error(
+        `[Startup] CRITICAL ERROR: Port ${PORT} is already in use. Please close the other process or set a different PORT in .env`,
+      );
+    } else {
+      console.error("[Startup] Server Error:", e);
+    }
+    process.exit(1);
+  });
+}
