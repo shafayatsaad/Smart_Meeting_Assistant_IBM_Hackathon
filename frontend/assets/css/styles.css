@@ -240,6 +240,7 @@ body::after {
 }
 .member-name { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
 .member-role { color: var(--blue); font-size: 14px; font-weight: 500; margin-bottom: 16px; }
+.member-bio { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
 
 .member-social {
   display: flex;
