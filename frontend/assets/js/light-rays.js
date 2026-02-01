@@ -1,4 +1,5 @@
-import { Renderer, Program, Triangle, Mesh } from 'https://unpkg.com/ogl@1.0.11/dist/ogl.mjs';
+// UMD Version: Expects 'ogl' to be available on window
+const { Renderer, Program, Triangle, Mesh } = window.ogl || {};
 
 const DEFAULT_COLOR = '#ffffff';
 
@@ -29,7 +30,12 @@ const getAnchorAndDir = (origin, w, h) => {
   }
 };
 
-export function initLightRays(containerId, config = {}) {
+window.initLightRays = function(containerId, config = {}) {
+  // Check if OGL loaded
+  if (!window.ogl) {
+    console.error('OGL library not loaded. LightRays aborted.');
+    return;
+  }
   console.log('Initializing LightRays for', containerId);
   const container = document.getElementById(containerId);
   if (!container) {
