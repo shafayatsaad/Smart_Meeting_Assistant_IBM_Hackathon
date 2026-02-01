@@ -15,9 +15,9 @@
     html { background: #030408; }
     body { opacity: 0; transition: opacity 0.15s ease-in; }
     body.loaded { opacity: 1; }
-    .flow { display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap; padding: 20px; }
-    .flow .step { background: var(--glass); border: 1px solid var(--glass-border); padding: 12px 16px; border-radius: 12px; min-width: 160px; text-align:center; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
-    .arrow { color: var(--text-dim); transition: all 0.5s ease; font-size: 20px; font-weight: bold; }
+    .flow { display:flex; gap:24px; align-items:center; justify-content:center; flex-wrap:wrap; padding: 40px 20px; }
+    .flow .step { background: var(--glass); border: 1px solid var(--glass-border); padding: 20px 28px; border-radius: 20px; min-width: 220px; text-align:center; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; font-weight: 600; font-size: 16px; letter-spacing: 0.5px; }
+    .arrow { color: var(--text-dim); transition: all 0.5s ease; font-size: 24px; font-weight: bold; opacity: 0.7; }
     
     /* Sequential Glow Effect */
     .step.active { 
@@ -137,7 +137,7 @@
       const parent = document.getElementById('workflowSteps');
       const elements = Array.from(parent.children);
       let currentIndex = 0;
-      const INTERVAL = 1200; // Faster, more dynamic interval
+      const INTERVAL = 2000; // Slower, more readable pacing
 
       function nextStep() {
         // Remove active class from all elements
