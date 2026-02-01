@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Smart Meeting Assistant - Input</title>
+  <!-- Preload fonts to prevent FOUC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script type="module" src="assets/js/input.js" defer></script>
+  <style>
+    /* Critical CSS to prevent white flash */
+    html { background: #030408; }
+    body { opacity: 0; transition: opacity 0.15s ease-in; }
+    body.loaded { opacity: 1; }
+  </style>
+</head>
+<body onload="document.body.classList.add('loaded')">
+  <header>
+    <div>
+      <h1 style="margin:0; font-size:22px; letter-spacing:-1px;">VICTORS<span>AI</span></h1>
+      <div style="font-size:9px; color:var(--accent-blue); font-weight:800; letter-spacing:3px;">SMART ASSISTANT</div>
+    </div>
+    <div class="btn-group">
+      <a href="index.html" class="btn">🏠 Home</a>
+      <a href="input.html" class="btn btn-primary">📝 Input</a>
+      <a href="results.html" class="btn">📊 Results</a>
+      <a href="demo.html" class="btn">🧩 Demo</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="section-title">MEETING TRANSCRIPT</div>
+      <div id="connectionStatus" style="font-size: 11px; margin-bottom: 8px;">Checking backend connection...</div>
+      <textarea id="transcript" placeholder="Paste your meeting transcript here... (Tip: Press Ctrl+Enter to process)"></textarea>
+      <div class="helper">Paste your meeting transcript above. The AI will extract summaries, action items, and follow-ups.</div>
+
+      <!-- Attachment display area -->
+      <div id="attachmentArea" style="display:none; margin-top:12px; padding:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:8px;">
+        <div style="font-size:10px; color:var(--text-dim); margin-bottom:6px; text-transform:uppercase; letter-spacing:1px;">Attached Document</div>
+        <div id="attachmentChip" style="display:inline-flex; align-items:center; gap:8px; padding:8px 12px; background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(99,102,241,0.05)); border:1px solid rgba(99,102,241,0.3); border-radius:6px;">
+          <span style="font-size:18px;">📄</span>
+          <span id="attachmentName" style="font-size:13px; color:var(--text-primary); max-width:250px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></span>
+          <span id="attachmentSize" style="font-size:11px; color:var(--text-dim);"></span>
+          <button id="removeAttachment" style="background:none; border:none; color:var(--accent-red, #ef4444); cursor:pointer; font-size:16px; padding:2px 6px; border-radius:4px; transition:background 0.2s;" title="Remove attachment">✕</button>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; align-items: center;">
+        <button id="processBtn" class="btn btn-primary">Process Transcript</button>
+        <input type="file" id="fileInput" accept=".txt,.md,.doc,.docx,.pdf" style="display:none;">
+        <button id="uploadBtn" class="btn" title="Upload a document file">📄 Upload Document</button>
+        <span id="status" class="status" style="display:none;"><span class="spinner"></span> Processing with AI agents...</span>
+      </div>
+      <div id="error" class="error" style="display:none;"></div>
+    </div>
+
+    <div class="card" style="margin-top:15px;">
+      <div class="section-title">HOW IT WORKS</div>
+      <ul class="list">
+        <li>📝 <strong>Understanding Agent</strong> — Structures your transcript, identifies decisions, risks, and key points</li>
+        <li>✅ <strong>Action Agent</strong> — Extracts tasks, assigns owners, flags unassigned items</li>
+        <li>🔄 <strong>Follow-Up Agent</strong> — Suggests next meetings, escalations, and reminders</li>
+        <li>💬 <strong>Q&A Agent</strong> — Answer questions about the meeting on the Results page</li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo">
+          <span class="brand">VICTORSAI</span>
+          <span class="sub">SMART ASSISTANT</span>
+        </div>
+        <p style="margin-top: 15px;">Transforming how teams capture, analyze, and act on meeting intelligence through agentic AI orchestration.</p>
+        <div class="watsonx-badge">
+          <span>Powered by</span>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" height="10" style="filter: invert(1);">
+          <span>watsonx.ai</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul class="footer-links">
+          <li><a href="demo.html">Demo Flow</a></li>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="input.html">Launch App</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="https://github.com/kenshin101/smart-meeting-assistant">GitHub</a></li>
+          <li><a href="https://github.com/kenshin101/smart-meeting-assistant/blob/main/README.md">Documentation</a></li>
+          <li><a href="#">API Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Mission</h4>
+        <p>Built for the IBM Hackathon to push the boundaries of multi-agent collaboration and real-time intelligence extraction.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 VICTORSAI. All rights reserved.</p>
+      <div style="display: flex; gap: 20px;">
+        <span style="font-weight:800; color:var(--text-main);">IBM HACKATHON 2026</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
