@@ -1,4 +1,4 @@
-import { Renderer, Program, Triangle, Mesh } from 'https://cdn.jsdelivr.net/npm/ogl@0.0.32/dist/ogl.mjs';
+import { Renderer, Program, Triangle, Mesh } from 'https://unpkg.com/ogl@1.0.11/dist/ogl.mjs';
 
 const DEFAULT_COLOR = '#ffffff';
 
@@ -30,8 +30,12 @@ const getAnchorAndDir = (origin, w, h) => {
 };
 
 export function initLightRays(containerId, config = {}) {
+  console.log('Initializing LightRays for', containerId);
   const container = document.getElementById(containerId);
-  if (!container) return;
+  if (!container) {
+    console.error('LightRays container not found:', containerId);
+    return;
+  }
 
   const {
     raysOrigin = 'top-center',
@@ -50,14 +54,16 @@ export function initLightRays(containerId, config = {}) {
 
   const renderer = new Renderer({
     dpr: Math.min(window.devicePixelRatio, 2),
-    alpha: true
+    alpha: true,
+    premultipliedAlpha: false
   });
   
   const gl = renderer.gl;
   gl.canvas.style.width = '100%';
   gl.canvas.style.height = '100%';
+  gl.canvas.style.display = 'block';
   
-  container.innerHTML = ''; // Clear previous content
+  container.innerHTML = ''; 
   container.appendChild(gl.canvas);
 
   const vert = `
@@ -155,6 +161,9 @@ export function initLightRays(containerId, config = {}) {
       }
 
       fragColor.rgb *= raysColor;
+      
+      // Enhance alpha for blending
+      fragColor.a = length(fragColor.rgb) * 0.5; 
     }
 
     void main() {
@@ -185,7 +194,8 @@ export function initLightRays(containerId, config = {}) {
   const program = new Program(gl, {
     vertex: vert,
     fragment: frag,
-    uniforms
+    uniforms,
+    transparent: true
   });
   const mesh = new Mesh(gl, { geometry, program });
 
@@ -195,6 +205,10 @@ export function initLightRays(containerId, config = {}) {
   const updatePlacement = () => {
     renderer.dpr = Math.min(window.devicePixelRatio, 2);
     const { clientWidth: wCSS, clientHeight: hCSS } = container;
+    
+    // Ensure container has dimensions
+    if (wCSS === 0 || hCSS === 0) return;
+    
     renderer.setSize(wCSS, hCSS);
 
     const dpr = renderer.dpr;
@@ -231,6 +245,10 @@ export function initLightRays(containerId, config = {}) {
   }
 
   window.addEventListener('resize', updatePlacement);
-  updatePlacement();
+  
+  // Initial update
+  setTimeout(updatePlacement, 100);
+  
   requestAnimationFrame(loop);
+  console.log('LightRays loop started');
 }
