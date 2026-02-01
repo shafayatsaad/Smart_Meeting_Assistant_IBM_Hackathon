@@ -135,21 +135,26 @@
     </div>
   </footer>
 
-  <script type="module">
-    import { initLightRays } from './assets/js/light-rays.js';
+  <script src="https://unpkg.com/ogl@1.0.11/dist/ogl.umd.js"></script>
+  <script src="./assets/js/light-rays.js"></script>
 
-    // Initialize LightRays
-    initLightRays('light-rays-container', {
-      raysColor: '#0f62fe', // Victorious Blue
-      raysSpeed: 0.2, // Slow and majestic
-      lightSpread: 0.2,
-      rayLength: 1.5,
-      fadeDistance: 0.8,
-      mouseInfluence: 0.05
+  <script>
+    // Initialize LightRays (now attached to window)
+    window.addEventListener('load', () => {
+      if (window.initLightRays) {
+        initLightRays('light-rays-container', {
+          raysColor: '#0f62fe', // Victorious Blue
+          raysSpeed: 0.2, // Slow and majestic
+          lightSpread: 0.2,
+          rayLength: 1.5,
+          fadeDistance: 0.8,
+          mouseInfluence: 0.05
+        });
+      }
     });
 
     // Initialize Lucide Icons
-    lucide.createIcons();
+    if(window.lucide) lucide.createIcons();
   </script>
 
   <script>
