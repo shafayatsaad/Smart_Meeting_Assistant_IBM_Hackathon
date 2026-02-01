@@ -202,12 +202,19 @@ body::after {
 .team { padding: 80px 48px; text-align: center; }
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   justify-items: center;
   align-items: start;
-  gap: 30px;
+  gap: 40px;
   margin: 48px auto 0;
-  max-width: 1200px; /* Keeps 4 cards together comfortably */
+  max-width: 700px; /* Perfectly fits 2x2 layout */
+}
+
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
 }
 .team-member {
   background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
