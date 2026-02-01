@@ -201,11 +201,13 @@ body::after {
 /* TEAM SECTION */
 .team { padding: 80px 48px; text-align: center; }
 .team-grid {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  justify-items: center;
+  align-items: start;
+  gap: 30px;
+  margin: 48px auto 0;
+  max-width: 1200px; /* Keeps 4 cards together comfortably */
 }
 .team-member {
   background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
