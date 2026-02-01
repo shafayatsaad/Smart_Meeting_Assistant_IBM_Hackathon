@@ -41,7 +41,7 @@ function renderSummary(data) {
   if (summaryData.meetingSummary) {
     html += `
       <div class="result-group">
-        <div class="result-label">📝 Overview</div>
+        <div class="result-label"><i data-lucide="file-text"></i> Overview</div>
         <div class="result-value">${escapeHtml(summaryData.meetingSummary)}</div>
       </div>`;
   }
@@ -50,7 +50,7 @@ function renderSummary(data) {
   if (summaryData.participants?.length > 0) {
     html += `
       <div class="result-group">
-        <div class="result-label">👥 Participants</div>
+        <div class="result-label"><i data-lucide="users"></i> Participants</div>
         <div class="result-value">${escapeHtml(summaryData.participants.join(', '))}</div>
       </div>`;
   }
@@ -59,7 +59,7 @@ function renderSummary(data) {
   if (summaryData.keyPoints?.length > 0) {
     html += `
       <div class="result-group">
-        <div class="result-label">📌 Key Points</div>
+        <div class="result-label"><i data-lucide="list"></i> Key Points</div>
         <ul class="result-list">
           ${summaryData.keyPoints.map(p => `<li>${escapeHtml(p)}</li>`).join('')}
         </ul>
@@ -70,18 +70,18 @@ function renderSummary(data) {
   if (summaryData.decisions?.length > 0) {
     html += `
       <div class="result-group">
-        <div class="result-label" style="color: var(--accent-green, #4ade80);">✅ Decisions Made</div>
+        <div class="result-label" style="color: var(--accent-green, #4ade80);"><i data-lucide="check-circle" style="color: #4ade80;"></i> Decisions Made</div>
         <ul class="result-list">
           ${summaryData.decisions.map(d => `<li>${escapeHtml(d)}</li>`).join('')}
         </ul>
       </div>`;
   }
   
-  // Unresolved Issues (Merged with Risks if small, or separate)
+  // Unresolved Issues
   if (summaryData.unresolvedIssues?.length > 0) {
     html += `
       <div class="result-group">
-        <div class="result-label" style="color: var(--accent-orange, #fb923c);">⚠️ Unresolved Issues</div>
+        <div class="result-label" style="color: var(--accent-orange, #fb923c);"><i data-lucide="alert-triangle" style="color: #fb923c;"></i> Unresolved Issues</div>
         <ul class="result-list">
           ${summaryData.unresolvedIssues.map(i => `<li>${escapeHtml(i)}</li>`).join('')}
         </ul>
@@ -92,7 +92,7 @@ function renderSummary(data) {
   if (summaryData.risks?.length > 0) {
     html += `
       <div class="result-group">
-        <div class="result-label" style="color: var(--accent-red, #ef4444);">🚨 Risks Identified</div>
+        <div class="result-label" style="color: var(--accent-red, #ef4444);"><i data-lucide="shield-alert" style="color: #ef4444;"></i> Risks Identified</div>
         <ul class="result-list">
           ${summaryData.risks.map(r => `<li>${escapeHtml(r)}</li>`).join('')}
         </ul>
@@ -103,7 +103,7 @@ function renderSummary(data) {
   if (summaryData.topics?.length > 0) {
      html += `
       <div class="result-group">
-        <div class="result-label">🏷️ Topics</div>
+        <div class="result-label"><i data-lucide="tag"></i> Topics</div>
         <div class="result-value" style="font-size: 12px; opacity: 0.8;">${escapeHtml(summaryData.topics.join(', '))}</div>
       </div>`;
   }
@@ -115,6 +115,7 @@ function renderSummary(data) {
   }
   
   els.summary.innerHTML = html;
+  if(window.lucide) lucide.createIcons();
 }
 
 /**
@@ -132,9 +133,9 @@ function renderActions(data) {
   if (actionsData.summary) {
     const s = actionsData.summary;
     html += `<div style="display: flex; gap: 12px; margin-bottom: 16px; font-size: 11px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">
-      <span style="color: var(--text-main);">📊 <strong>${s.totalTasks || 0}</strong> Tasks</span>
-      <span style="color: var(--accent-green, #4ade80);">✅ <strong>${s.assignedTasks || 0}</strong> Assigned</span>
-      <span style="color: var(--accent-orange, #fb923c);">⚠️ <strong>${s.flaggedItems || 0}</strong> Flagged</span>
+      <span style="color: var(--text-main); display:flex; align-items:center; gap:4px;"><i data-lucide="bar-chart-2" style="width:12px; height:12px;"></i> <strong>${s.totalTasks || 0}</strong> Tasks</span>
+      <span style="color: var(--accent-green, #4ade80); display:flex; align-items:center; gap:4px;"><i data-lucide="user-check" style="width:12px; height:12px;"></i> <strong>${s.assignedTasks || 0}</strong> Assigned</span>
+      <span style="color: var(--accent-orange, #fb923c); display:flex; align-items:center; gap:4px;"><i data-lucide="alert-circle" style="width:12px; height:12px;"></i> <strong>${s.flaggedItems || 0}</strong> Flagged</span>
     </div>`;
   }
   
@@ -152,16 +153,16 @@ function renderActions(data) {
         html += `
         <div class="action-card" style="${flagged ? 'border-left: 3px solid var(--accent-orange);' : ''}">
           <div class="action-header">
-            <div class="action-title">${flagged ? '⚠️ ' : ''}${escapeHtml(task)}</div>
+            <div class="action-title">${flagged ? '<i data-lucide="star" style="width:12px; height:12px; margin-right:4px; fill:var(--accent-orange); color:var(--accent-orange);"></i> ' : ''}${escapeHtml(task)}</div>
             <span class="priority-badge priority-${priority}">${priority}</span>
           </div>
           <div class="action-meta">
-            <span style="${owner === 'Unassigned' ? 'color: var(--accent-orange);' : 'color: var(--accent-blue);'}">
-              👤 ${escapeHtml(owner)}
+            <span style="display:flex; align-items:center; gap:4px; ${owner === 'Unassigned' ? 'color: var(--accent-orange);' : 'color: var(--accent-blue);'}">
+              <i data-lucide="user" style="width:12px; height:12px;"></i> ${escapeHtml(owner)}
             </span>
-            <span>📅 ${escapeHtml(deadline)}</span>
+            <span style="display:flex; align-items:center; gap:4px;"><i data-lucide="calendar" style="width:12px; height:12px;"></i> ${escapeHtml(deadline)}</span>
           </div>
-          ${item.flagReason ? `<div style="margin-top: 8px; font-size: 11px; color: var(--accent-orange); background: rgba(251, 146, 60, 0.1); padding: 4px 8px; border-radius: 4px;">⚡ ${escapeHtml(item.flagReason)}</div>` : ''}
+          ${item.flagReason ? `<div style="margin-top: 8px; font-size: 11px; color: var(--accent-orange); background: rgba(251, 146, 60, 0.1); padding: 4px 8px; border-radius: 4px; display:flex; align-items:center; gap:4px;"><i data-lucide="zap" style="width:10px; height:10px;"></i> ${escapeHtml(item.flagReason)}</div>` : ''}
         </div>`;
       }
     });
@@ -170,6 +171,7 @@ function renderActions(data) {
   }
   
   els.actions.innerHTML = html;
+  if(window.lucide) lucide.createIcons();
 }
 
 /**
@@ -189,7 +191,7 @@ function renderFollowups(data) {
   if (escalations.length > 0) {
     html += `
       <div class="result-group">
-        <div class="result-label" style="color: var(--accent-red, #ef4444);">🚨 Escalations Required</div>
+        <div class="result-label" style="color: var(--accent-red, #ef4444);"><i data-lucide="siren" style="color: #ef4444;"></i> Escalations Required</div>
         ${escalations.map(esc => `
           <div class="followup-item" style="border-left: 3px solid var(--accent-red);">
              <div class="followup-content">
@@ -208,7 +210,7 @@ function renderFollowups(data) {
   if (nextMeeting.recommended) {
     html += `
       <div class="result-group">
-        <div class="result-label" style="color: var(--accent-blue, #3b82f6);">📅 Next Meeting</div>
+        <div class="result-label" style="color: var(--accent-blue, #3b82f6);"><i data-lucide="calendar-plus" style="color: #3b82f6;"></i> Next Meeting</div>
         <div class="followup-item" style="display: block;">
            <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">${escapeHtml(nextMeeting.suggestedTimeframe || 'TBD')}</div>
            ${nextMeeting.agenda?.length > 0 ? `<div style="font-size: 12px; color: var(--text-dim);"><strong>Agenda:</strong> ${escapeHtml(nextMeeting.agenda.join(', '))}</div>` : ''}
@@ -219,16 +221,17 @@ function renderFollowups(data) {
   
   // Follow-up Actions
   if (Array.isArray(followUpActions) && followUpActions.length > 0) {
-    const typeIcons = { meeting: '📅', email: '📧', escalation: '🚨', reminder: '⏰', review: '📋' };
+    const typeIcons = { meeting: 'calendar', email: 'mail', escalation: 'alert-triangle', reminder: 'clock', review: 'clipboard-list' };
     
-    html += `<div class="result-group"><div class="result-label">Recommended Actions</div>`;
+    html += `<div class="result-group"><div class="result-label"><i data-lucide="check-square"></i> Recommended Actions</div>`;
     followUpActions.forEach(action => {
       if (typeof action === 'string') {
         html += `<div class="followup-item">${escapeHtml(action)}</div>`;
       } else {
+        const iconName = typeIcons[action.type] || 'pin';
         html += `
         <div class="followup-item">
-          <div class="followup-icon">${typeIcons[action.type] || '📌'}</div>
+          <div class="followup-icon"><i data-lucide="${iconName}"></i></div>
           <div class="followup-content">
             <div style="font-size: 13px; font-weight: 500;">${escapeHtml(action.action)}</div>
             <div style="display: flex; gap: 8px; margin-top: 4px; font-size: 11px; color: var(--text-dim);">
@@ -245,6 +248,7 @@ function renderFollowups(data) {
   }
   
   els.followups.innerHTML = html;
+  if(window.lucide) lucide.createIcons();
 }
 
 function renderRaw(data) {
