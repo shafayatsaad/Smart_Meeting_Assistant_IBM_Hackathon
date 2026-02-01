@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap">
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="manifest" href="site.webmanifest">
 </head>
@@ -36,6 +37,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div id="light-rays-container"></div>
     <div class="hero-content reveal">
       <h1>Turn Meetings Into <span>Actionable Intelligence</span></h1>
       <p>
@@ -54,17 +56,20 @@
   <section id="features" class="features">
 
     <div class="feature-card reveal stagger-1">
-      <h3>🧠 Contextual AI Assistant</h3>
+      <i data-lucide="brain-circuit" style="width: 32px; height: 32px;"></i>
+      <h3>Contextual AI Assistant</h3>
       <p>Ask questions mid-meeting and get instant, context-aware answers with deep meeting history.</p>
     </div>
 
     <div class="feature-card reveal stagger-2">
-      <h3>📋 Smart Summaries</h3>
+      <i data-lucide="file-text" style="width: 32px; height: 32px;"></i>
+      <h3>Smart Summaries</h3>
       <p>AI-generated summaries from your uploaded or pasted meeting contents.</p>
     </div>
 
     <div class="feature-card reveal stagger-3">
-      <h3>✅ Action Items</h3>
+      <i data-lucide="check-circle" style="width: 32px; height: 32px;"></i>
+      <h3>Action Items</h3>
       <p>Extract tasks, owners, and deadlines in real time. Never miss a single commitment again.</p>
     </div>
   </section>
@@ -128,6 +133,23 @@
       </div>
     </div>
   </footer>
+
+  <script type="module">
+    import { initLightRays } from './assets/js/light-rays.js';
+
+    // Initialize LightRays
+    initLightRays('light-rays-container', {
+      raysColor: '#0f62fe', // Victorious Blue
+      raysSpeed: 0.2, // Slow and majestic
+      lightSpread: 0.2,
+      rayLength: 1.5,
+      fadeDistance: 0.8,
+      mouseInfluence: 0.05
+    });
+
+    // Initialize Lucide Icons
+    lucide.createIcons();
+  </script>
 
   <script>
     // Sticky Nav Scroll effect
